@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Erregistratu</title>
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <h:form id="registerForm">
+        <h3>Kontua Sortu</h3>
+        <h:messages style="color:red;"/>
+
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Email berria:" />
+            <h:inputText value="#{loginBean.email}" required="true" />
+
+            <h:outputLabel value="Pasahitza:" />
+            <h:inputSecret value="#{loginBean.password}" required="true" />
+        </h:panelGrid>
+
+        <br/>
+        <h:commandButton value="Erregistratu" action="#{loginBean.register()}" />
+        <br/><br/>
+        <h:link value="Dagoeneko baduzu kontua? Logueatu" outcome="Login" />
+    </h:form>
+</h:body>
+</html>

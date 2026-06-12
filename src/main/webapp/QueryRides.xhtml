@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Query Rides</title>
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <h:form id="nireForm">
+        <h3>Bidaia Bilatzailea</h3>
+        <h:messages id="mezuak" styleClass="info-msg" globalOnly="true"/>
+
+        <table>
+            <tr>
+                <td>Depart City:</td>
+                <td>
+                    <h:inputText id="depart" value="#{queryRideBean.departingCity}" required="true">
+                        <f:validateRegex pattern="^(([a-z]|[A-Z])+[0-9]?)$"/>
+                    </h:inputText>
+                </td>
+                <td><h:message for="depart" style="color:red"/></td>
+            </tr>
+            <tr>
+                <td>Arrival City:</td>
+                <td>
+                    <h:inputText id="arrival" value="#{queryRideBean.arrivalCity}" required="true"/>
+                </td>
+                <td><h:message for="arrival" style="color:red"/></td>
+            </tr>
+            <tr>
+                <td>Date:</td>
+                <td>
+                    <p:calendar id="data" value="#{queryRideBean.rideDate}"
+                                mode="inline" required="true"/>
+                </td>
+                <td><h:message for="data" style="color:red"/></td>
+            </tr>
+        </table>
+
+        <p>
+            <h:commandButton value="Buscar" action="#{queryRideBean.searchRides()}"/>
+            <h:commandButton value="Close" action="Menua" immediate="true"
+                             onclick="if (!confirm('Ziur zaude?')) return false"/>
+        </p>
+
+        <h:dataTable value="#{queryRideBean.results}" var="item" border="1"
+                     rendered="#{not empty queryRideBean.results}">
+            <f:facet name="header">Bidaiak / Rides</f:facet>
+            <h:column>
+                <f:facet name="header">Driver</f:facet>
+                #{item.driver.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">From</f:facet>
+                #{item.from}
+            </h:column>
+            <h:column>
+                <f:facet name="header">To</f:facet>
+                #{item.to}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Price</f:facet>
+                #{item.price}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>

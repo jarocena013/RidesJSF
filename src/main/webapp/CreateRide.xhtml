@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+    <title>Create Ride</title>
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <h3>Create Ride</h3>
+    <h:form id="createForm">
+        <h:messages globalOnly="false" showDetail="true"/>
+        
+        <h:panelGrid columns="3">
+            <h:outputLabel value="Depart City:" />
+            <h:inputText id="depart" value="#{createRideBean.departCity}" required="true">
+                <f:validateRegex pattern="^(([a-z]|[A-Z])+[0-9]?)$"/>
+            </h:inputText>
+            <h:message for="depart" style="color:red" />
+            
+            <h:outputLabel value="Arrival City:" />
+            <h:inputText id="arrival" value="#{createRideBean.arrivalCity}" required="true" />
+            <h:message for="arrival" style="color:red" />
+            
+            <h:outputLabel value="Date (Calendar):" />
+            <p:calendar id="rideDate" value="#{createRideBean.rideDate}"
+                        label="Ride Date" required="true" showIcon="true" pattern="dd/MM/yyyy" />
+            <h:message for="rideDate" style="color:red" />
+            
+            <h:outputLabel value="Seats:" />
+            <h:inputText id="seats" value="#{createRideBean.seats}" required="true" />
+            <h:message for="seats" style="color:red" />
+            
+            <h:outputLabel value="Price:" />
+            <h:inputText id="price" value="#{createRideBean.price}" required="true" />
+            <h:message for="price" style="color:red" />
+        </h:panelGrid>
+        
+        <p>
+            <h:commandButton value="Bidaia sortu" action="#{createRideBean.create(loginBean.email)}" />
+            <h:commandButton value="Close" action="Menua" immediate="true" 
+                             onclick="if (!confirm('¿Estás seguro?')) return false"/>
+        </p>
+    </h:form>
+</h:body>
+</html>
